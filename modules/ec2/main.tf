@@ -30,7 +30,7 @@ resource "aws_instance" "web" {
   ami                    = var.ami
   instance_type          = var.instance_type
   subnet_id              = var.subnet_ids[count.index]
-  key_name               = length(trimspace(var.key_name)) > 0 ? var.key_name : null
+  key_name               = var.key_name
   associate_public_ip_address = true
   iam_instance_profile   = var.iam_instance_profile
   vpc_security_group_ids = [aws_security_group.ec2.id]
@@ -43,3 +43,4 @@ resource "aws_instance" "web" {
 output "public_ips" {
   value = aws_instance.web[*].public_ip
 }
+
