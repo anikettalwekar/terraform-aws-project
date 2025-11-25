@@ -1,0 +1,4 @@
+region = "us-east-1"
+project_name = "demo"
+db_password = "ChangeThisPassword123!"
+key_name = "your-ssh-key-name"
