@@ -13,14 +13,6 @@ pipeline {
             }
         }
 
-        stage('Setup Terraform') {
-            steps {
-                sh '''
-                terraform --version
-                '''
-            }
-        }
-
         stage('Terraform Init') {
             steps {
                 withAWS(credentials: 'aws-creds', region: "${AWS_REGION}") {
@@ -35,7 +27,7 @@ pipeline {
             steps {
                 withAWS(credentials: 'aws-creds', region: "${AWS_REGION}") {
                     sh '''
-                    terraform plan -out=tfplan
+                    terraform plan -var-file=terraform.tfvars.example -out=tfplan
                     '''
                 }
             }
